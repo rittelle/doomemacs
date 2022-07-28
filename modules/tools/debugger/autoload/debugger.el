@@ -34,12 +34,13 @@ the debugging configuration of the current buffer."
                (apply #'append (mapcar #'funcall dap-launch-configuration-providers)))))
 
 (defun +debugger--list-for-realgud ()
-  (mapcar (lambda (c) (cons 'realgud (list (symbol-name c))))
-          (cl-loop for (sym . plist) in +debugger--realgud-alist
-                   for sym-name = (symbol-name sym)
-                   for modes = (plist-get plist :modes)
-                   if (or (null modes) (apply #'derived-mode-p modes))
-                   collect sym)))
+  (and (require 'realgud nil t)
+       (mapcar (lambda (c) (cons 'realgud (list (symbol-name c))))
+               (cl-loop for (sym . plist) in +debugger--realgud-alist
+                       for sym-name = (symbol-name sym)
+                       for modes = (plist-get plist :modes)
+                       if (or (null modes) (apply #'derived-mode-p modes))
+                       collect sym))))
 
 ;; Based on dap--completing-read and dap-debug
 (defun +debugger-completing-read ()

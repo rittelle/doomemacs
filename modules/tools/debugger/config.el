@@ -46,6 +46,7 @@
              projectile-variable-plist))
 
 (use-package! realgud
+  :when (featurep! +realgud)
   :defer t
   :init
   (use-package! realgud-trepan-ni

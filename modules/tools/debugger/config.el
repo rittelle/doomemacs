@@ -152,7 +152,10 @@
 
   (map! :localleader
         :map +dap-running-session-mode-map
-        "d" #'dap-hydra))
+        "d" #'dap-hydra
+        :localleader
+        :map +dap-running-session-mode-map
+        "q" #'+debugger/quit)) ;; TODO: Imitate the same mapping in realgud
 
 
 (use-package! dap-ui

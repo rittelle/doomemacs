@@ -123,6 +123,16 @@ for what debugger to use. If the prefix ARG is set, prompt anyway."
 ;; (defun +debugger/toggle-breakpoint ()
 ;;   (interactive)
 ;;   (user-error "not implemented yet"))
+(defun +debugger/toggle-breakpoint ()
+  "Toggle a breakpoint in the current line."
+  (interactive)
+  (and (or (bound-and-true-p lsp-mode)
+           (bound-and-true-p lsp--buffer-deferred))
+       (require 'dap-mode nil t)
+       dap-mode
+       dap-breakpoint-toggle)
+  (and t)
+  (user-error "not implemented yet"))
 
 ;; ;;;###autoload
 ;; (defun +debugger/next-breakpoint ()
